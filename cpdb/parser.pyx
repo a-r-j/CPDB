@@ -120,7 +120,6 @@ def parse_pdb(filename, int max_atoms=1000000) -> object:
         model_idx[i] = atom_data[i].model_idx
         atom_number[i] = atom_data[i].atom_serial
         residue_number[i] = atom_data[i].res_num
-        atom_name[i] = ATOM_NUMBERING.get()
 
         # Fill NumPy arrays for string columns
         record_name[i] = atom_data[i].record_type[:strlen(atom_data[i].record_type)].decode('ascii', errors='replace').strip()
