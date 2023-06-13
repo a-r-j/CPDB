@@ -1,5 +1,16 @@
+[![PyPI version](https://badge.fury.io/py/cpdb-protein.svg)](https://badge.fury.io/py/cpdb-protein)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+
+
 # CPDB
 Cython implementation of PDB -> DataFrame parsing
+
+## Installation
+
+```bash
+pip install cpdb-protein
+```
 
 
 ## Usage
