@@ -23,6 +23,7 @@ from cpdb import parse
 
 # From Disk
 data = parse("path_to_pdb.pdb", df=False)
+data = parse("path_to_pdb.pdb.gz", df=False)
 
 # From str
 with open("tests/test_data/1htq.pdb") as f:
@@ -48,6 +49,7 @@ from cpdb import parse
 
 # From Disk
 data = parse("path_to_pdb.pdb", df=True)
+data = parse("path_to_pdb.pdb.gz", df=True)
 
 # From str
 with open("tests/test_data/1htq.pdb") as f:
