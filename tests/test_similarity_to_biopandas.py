@@ -11,7 +11,7 @@ from pandas.testing import assert_frame_equal
 pyximport.install(setup_args={
                               "include_dirs": np.get_include()},
                   reload_support=True)
-from cpdb import parse_pdb
+from cpdb import parse
 
 #from cpdb.parser import parse_pdb as parse
 
@@ -30,7 +30,7 @@ def test():
     for f in TEST_FILES:
         print(f)
         ppdb = PandasPdb().read_pdb(str(DATA_DIR / f))
-        cp = parse_pdb(str(DATA_DIR / f))
+        cp = parse(str(DATA_DIR / f))
         cp = pd.DataFrame.from_dict(cp)
         cp = cp[COLUMNS_TO_CHECK]
         print(len(cp))
