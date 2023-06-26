@@ -1,10 +1,11 @@
+import gzip
 import os
 import pathlib
 import sys
 from typing import Dict, Optional, Union
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
-import gzip
+
 import numpy as np
 import pandas as pd
 
@@ -26,7 +27,11 @@ def parse(
         if fname.endswith(("pdb.gz", ".ent.gz")):
             with gzip.open(fname, "rb") as f:
                 pdb_str = f.read()
-            pdb_str = pdb_str.decode("utf-8") if sys.version_info[0] >= 3 else pdb_str.encode("ascii")
+            pdb_str = (
+                pdb_str.decode("utf-8")
+                if sys.version_info[0] >= 3
+                else pdb_str.encode("ascii")
+            )
         else:
             d = parse_pdb_file(fname)
 
