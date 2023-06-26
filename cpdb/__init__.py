@@ -1,3 +1,4 @@
+import gzip
 import os
 import pathlib
 import sys
@@ -23,7 +24,16 @@ def parse(
     if fname is not None:
         if isinstance(fname, pathlib.Path):
             fname = str(fname)
-        d = parse_pdb_file(fname)
+        if fname.endswith(("pdb.gz", ".ent.gz")):
+            with gzip.open(fname, "rb") as f:
+                pdb_str = f.read()
+            pdb_str = (
+                pdb_str.decode("utf-8")
+                if sys.version_info[0] >= 3
+                else pdb_str.encode("ascii")
+            )
+        else:
+            d = parse_pdb_file(fname)
 
     if pdb_str is not None:
         if isinstance(pdb_str, list):
