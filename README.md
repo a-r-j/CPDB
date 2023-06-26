@@ -21,7 +21,19 @@ pip install cpdb-protein
 # To dictionary
 from cpdb import parse
 
-data = parse("path_to_pdb.pdb")
+# From Disk
+data = parse("path_to_pdb.pdb", df=False)
+
+# From str
+with open("tests/test_data/1htq.pdb") as f:
+    pdb_file = f.readlines()
+data = parse(pdb_str=pdb_file, df=False)
+
+# From PDB
+data = parse(pdb_code="3eiy", df=False)
+
+# From AF2
+data = parse(uniprot_id="Q8W3K0", df=False)
 ```
 
 ```
@@ -34,7 +46,19 @@ data = parse("path_to_pdb.pdb")
 ```python
 from cpdb import parse
 
+# From Disk
 data = parse("path_to_pdb.pdb", df=True)
+
+# From str
+with open("tests/test_data/1htq.pdb") as f:
+    pdb_file = f.readlines()
+data = parse(pdb_str=pdb_file, df=True)
+
+# From PDB
+data = parse(pdb_code="3eiy", df=True)
+
+# From AF2
+data = parse(uniprot_id="Q8W3K0", df=True)
 ```
 
 ```
