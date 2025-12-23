@@ -6,6 +6,7 @@ setup(
     name="cpdb-protein",
     version="0.2.1",
     license="MIT",
+    license_files=["LICENSE"],
     author="Arian Jamasb",
     author_email="arian@jamasb.io",
     url="https://github.com/a-r-j/cpdb",
