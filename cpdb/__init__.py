@@ -11,7 +11,7 @@ import pandas as pd
 
 from .parser import parse_pdb_file, parse_pdb_string
 
-AF2_VERSION: int = 4
+AF2_VERSION: int = 6
 
 
 def parse(
@@ -20,6 +20,7 @@ def parse(
     pdb_code: Optional[str] = None,
     uniprot_id: Optional[str] = None,
     df: bool = True,
+    af2_version: int = AF2_VERSION,
 ) -> Union[Dict[str, np.ndarray], pd.DataFrame]:
     if fname is not None:
         if isinstance(fname, pathlib.Path):
@@ -45,7 +46,7 @@ def parse(
         d = parse_pdb_string(pdb_str)
 
     if uniprot_id is not None:
-        pdb_str = _fetch_af2(uniprot_id)
+        pdb_str = _fetch_af2(uniprot_id, af2_version)
         d = parse_pdb_string(pdb_str)
 
     return pd.DataFrame(d) if df else d
@@ -66,10 +67,10 @@ def _fetch_pdb(pdb_code: str) -> str:
     return txt
 
 
-def _fetch_af2(uniprot_id: str) -> str:
+def _fetch_af2(uniprot_id: str, af2_version: int = AF2_VERSION) -> str:
     """Load PDB file from https://alphafold.ebi.ac.uk/."""
     txt = None
-    url = f"https://alphafold.ebi.ac.uk/files/AF-{uniprot_id.upper()}-F1-model_v{AF2_VERSION}.pdb"
+    url = f"https://alphafold.ebi.ac.uk/files/AF-{uniprot_id.upper()}-F1-model_v{af2_version}.pdb"
     try:
         response = urlopen(url)
         txt = response.read()
