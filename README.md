@@ -1,3 +1,4 @@
+[![CI](https://github.com/a-r-j/CPDB/actions/workflows/ci.yml/badge.svg)](https://github.com/a-r-j/CPDB/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/cpdb-protein.svg)](https://badge.fury.io/py/cpdb-protein)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
@@ -8,9 +9,35 @@ Cython implementation of PDB -> DataFrame parsing
 
 ## Installation
 
+### From PyPI
+
 ```bash
 pip install cpdb-protein
 ```
+
+### Development (with [uv](https://docs.astral.sh/uv/))
+
+```bash
+uv sync
+```
+
+This creates a virtual environment, installs the package in editable mode, and pulls in dev dependencies (tests, Jupyter).
+
+Run tests:
+
+```bash
+uv run pytest tests/
+```
+
+Build a wheel:
+
+```bash
+uv build
+```
+
+### CI
+
+GitHub Actions runs tests on Python 3.9–3.13 and verifies package builds on every push to `main` and on pull requests. Pushing a tag matching `v*` (e.g. `v0.2.2`) publishes to PyPI via [trusted publishing](https://docs.pypi.org/trusted-publishers/) — configure a `pypi` environment and PyPI trusted publisher for `a-r-j/CPDB` before your first automated release.
 
 
 ## Usage
