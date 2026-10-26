@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-26
+
 ### Added
 
 - [uv](https://docs.astral.sh/uv/) for dependency management and local development (`pyproject.toml`, `uv.lock`)
 - GitHub Actions CI: tests on Python 3.10–3.13 and package build verification
-- Automated PyPI publishing on version tags (`v*`)
+- Automated PyPI publishing (sdist) on version tags (`v*`)
 - Dependabot for GitHub Actions and uv dependencies
 - This changelog
 - `parse_pdb_bytes()` for parsing raw PDB bytes
@@ -85,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High-level `parse()` API returning a pandas `DataFrame`
 - Benchmark notebook and test data under `tests/test_data/`
 
-[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.0
 [0.2.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.2.1
 [0.2.0]: https://pypi.org/project/cpdb-protein/0.2.0/
 [0.1.0]: https://pypi.org/project/cpdb-protein/0.1.0/

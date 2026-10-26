@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cpdb-protein"
-version = "0.2.1"
+version = "0.3.0"
 description = "Cython implementation of PDB -> DataFrame parsing"
 readme = "README.md"
 license = "MIT"

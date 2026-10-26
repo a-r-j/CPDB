@@ -27,7 +27,7 @@ jobs:
           enable-cache: true
 
       - name: Build
-        run: uv build
+        run: uv build --sdist  # wheels need manylinux builds (cibuildwheel); PyPI rejects plain linux_x86_64
 
       - name: Publish
         run: uv publish
