@@ -14,11 +14,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automated PyPI publishing on version tags (`v*`)
 - Dependabot for GitHub Actions and uv dependencies
 - This changelog
+- `parse_pdb_bytes()` for parsing raw PDB bytes
 
 ### Changed
 
 - Project metadata and dependencies consolidated in `pyproject.toml`
 - README badges and development install instructions updated for uv
+- Parser rewritten as a single C-level scanner: ~4x faster on large files (980k atoms: 515 ms → 125 ms)
+- `max_atoms` now defaults to no limit (previously 1,000,000; larger files were silently truncated)
+- Text fields are decoded with `errors="replace"` instead of raising on invalid UTF-8
+
+### Fixed
+
+- `charge` read only column 79, truncating values such as `2+` to `2`; now reads columns 79-80
+- Out-of-bounds reads on lines shorter than 80 columns; missing columns are now blank
+- `\r\n` line endings
+- Memory leak when the input file does not exist
 
 ## [0.2.1] - 2025-12-23
 

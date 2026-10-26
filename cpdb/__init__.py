@@ -9,7 +9,7 @@ from urllib.request import urlopen
 import numpy as np
 import pandas as pd
 
-from .parser import parse_pdb_file, parse_pdb_string
+from .parser import parse_pdb_bytes, parse_pdb_file, parse_pdb_string
 
 AF2_VERSION: int = 6
 
@@ -27,12 +27,7 @@ def parse(
             fname = str(fname)
         if fname.endswith(("pdb.gz", ".ent.gz")):
             with gzip.open(fname, "rb") as f:
-                pdb_str = f.read()
-            pdb_str = (
-                pdb_str.decode("utf-8")
-                if sys.version_info[0] >= 3
-                else pdb_str.encode("ascii")
-            )
+                d = parse_pdb_bytes(f.read())
         else:
             d = parse_pdb_file(fname)
 
