@@ -7,18 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-26
+
 ### Added
 
 - [uv](https://docs.astral.sh/uv/) for dependency management and local development (`pyproject.toml`, `uv.lock`)
-- GitHub Actions CI: tests on Python 3.9–3.13 and package build verification
-- Automated PyPI publishing on version tags (`v*`)
+- GitHub Actions CI: tests on Python 3.10–3.13 and package build verification
+- Automated PyPI publishing (sdist) on version tags (`v*`)
 - Dependabot for GitHub Actions and uv dependencies
 - This changelog
+- `parse_pdb_bytes()` for parsing raw PDB bytes
 
 ### Changed
 
 - Project metadata and dependencies consolidated in `pyproject.toml`
 - README badges and development install instructions updated for uv
+- Parser rewritten as a single C-level scanner: ~4x faster on large files (980k atoms: 515 ms → 125 ms)
+- `max_atoms` now defaults to no limit (previously 1,000,000; larger files were silently truncated)
+- Text fields are decoded with `errors="replace"` instead of raising on invalid UTF-8
+
+### Removed
+
+- Support for Python 3.8 and 3.9 (end of life); `requires-python` is now `>=3.10`
+
+### Fixed
+
+- `charge` read only column 79, truncating values such as `2+` to `2`; now reads columns 79-80
+- Out-of-bounds reads on lines shorter than 80 columns; missing columns are now blank
+- `\r\n` line endings
+- Memory leak when the input file does not exist
 
 ## [0.2.1] - 2025-12-23
 
@@ -70,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High-level `parse()` API returning a pandas `DataFrame`
 - Benchmark notebook and test data under `tests/test_data/`
 
-[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.0
 [0.2.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.2.1
 [0.2.0]: https://pypi.org/project/cpdb-protein/0.2.0/
 [0.1.0]: https://pypi.org/project/cpdb-protein/0.1.0/
