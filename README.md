@@ -1,20 +1,85 @@
-[![PyPI version](https://badge.fury.io/py/cpdb-protein.svg)](https://badge.fury.io/py/cpdb-protein)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+<p align="center">
 
+[![CI](https://github.com/a-r-j/CPDB/actions/workflows/ci.yml/badge.svg)](https://github.com/a-r-j/CPDB/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/cpdb-protein?color=3775A9)](https://pypi.org/project/cpdb-protein/)
+[![Python](https://img.shields.io/pypi/pyversions/cpdb-protein?color=3775A9)](https://pypi.org/project/cpdb-protein/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+[![Downloads](https://img.shields.io/pypi/dm/cpdb-protein)](https://pypi.org/project/cpdb-protein/)
+[![Cython](https://img.shields.io/badge/Cython-accelerated-2ea44f)](https://cython.org/)
+[![Code style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![GitHub stars](https://img.shields.io/github/stars/a-r-j/CPDB?style=social)](https://github.com/a-r-j/CPDB)
+
+</p>
 
 # CPDB
+
 Cython implementation of PDB -> DataFrame parsing
 
+See [CHANGELOG.md](CHANGELOG.md) for release history.
+
 ## Installation
+
+### From PyPI
 
 ```bash
 pip install cpdb-protein
 ```
 
+### Development (with [uv](https://docs.astral.sh/uv/))
+
+```bash
+uv sync
+```
+
+This creates a virtual environment, installs the package in editable mode, and pulls in dev dependencies (tests, Jupyter).
+
+Run tests:
+
+```bash
+uv run pytest tests/
+```
+
+Build a wheel:
+
+```bash
+uv build
+```
+
+### CI
+
+GitHub Actions runs tests on Python 3.9–3.13 and verifies package builds on every push to `main` and on pull requests. Pushing a tag matching `v*` (e.g. `v0.2.2`) publishes to PyPI via [trusted publishing](https://docs.pypi.org/trusted-publishers/) — configure a `pypi` environment and PyPI trusted publisher for `a-r-j/CPDB` before your first automated release.
+
 
 ## Usage
 
+The main entry point is `parse()` in `cpdb`. Provide **one** input source (`fname`, `pdb_str`, `pdb_code`, or `uniprot_id`); if more than one is given, later arguments override earlier ones.
+
+```python
+from cpdb import parse
+
+parse(
+    fname=None,
+    pdb_str=None,
+    pdb_code=None,
+    uniprot_id=None,
+    df=True,
+    af2_version=6,
+)
+```
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `fname` | `str`, `pathlib.Path`, or `os.PathLike` | `None` | Path to a PDB file on disk. Plain `.pdb` files are parsed directly. Files ending in `.pdb.gz` or `.ent.gz` are decompressed with gzip before parsing. |
+| `pdb_str` | `str` or `list[str]` | `None` | PDB contents as a single string or as a list of lines (e.g. from `readlines()`). Lists are joined before parsing. |
+| `pdb_code` | `str` | `None` | Four-character PDB identifier (e.g. `"3eiy"`). The structure is downloaded from [RCSB](https://www.rcsb.org/) (`files.rcsb.org`) and then parsed. |
+| `uniprot_id` | `str` | `None` | UniProt accession (e.g. `"Q8W3K0"`). The AlphaFold prediction is downloaded from [AlphaFold DB](https://alphafold.ebi.ac.uk/) and then parsed. |
+| `df` | `bool` | `True` | If `True`, return a `pandas.DataFrame`. If `False`, return a `dict` mapping column names to `numpy` arrays. |
+| `af2_version` | `int` | `6` | AlphaFold DB model version used when `uniprot_id` is set (e.g. `6` for `...-model_v6.pdb`). Ignored for other input modes. |
+
+**Returns:** `pandas.DataFrame` when `df=True`, otherwise `dict[str, numpy.ndarray]` with keys such as `record_name`, `atom_number`, `atom_name`, `residue_name`, `chain_id`, `x_coord`, `y_coord`, `z_coord`, `occupancy`, `b_factor`, `element_symbol`, and `model_idx`.
+
+Network fetches (`pdb_code`, `uniprot_id`) print an error message and may return empty results if the download fails.
 
 ### To Dictionary
 ```python

@@ -1,2 +1,46 @@
 [build-system]
-requires = ["setuptools", "wheel", "Cython>=0.29", "numpy >= 1.15"]
+requires = ["setuptools>=61", "wheel", "Cython>=0.29", "numpy>=1.15"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpdb-protein"
+version = "0.2.1"
+description = "Cython implementation of PDB -> DataFrame parsing"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Arian Jamasb", email = "arian@jamasb.io" }]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.15",
+    "pandas",
+    "cython>=0.29",
+]
+
+[project.urls]
+Homepage = "https://github.com/a-r-j/cpdb"
+
+[project.optional-dependencies]
+test = [
+    "biopandas",
+    "pytest",
+]
+
+[dependency-groups]
+dev = [
+    "biopandas",
+    "pytest",
+    "ipython",
+    "jupyter",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cpdb*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+required-version = ">=0.11.16"
+default-groups = ["dev"]

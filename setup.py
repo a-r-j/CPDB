@@ -1,20 +1,14 @@
 import numpy
 from Cython.Build import cythonize
-from setuptools import Extension, find_packages, setup
+from setuptools import Extension, setup
 
 setup(
-    name="cpdb-protein",
-    version="0.2.1",
-    license="MIT",
-    license_files=["LICENSE"],
-    author="Arian Jamasb",
-    author_email="arian@jamasb.io",
-    url="https://github.com/a-r-j/cpdb",
     ext_modules=cythonize(
-        ["cpdb/parser.pyx"], compiler_directives={"language_level": "3"}
+        Extension(
+            "cpdb.parser",
+            ["cpdb/parser.pyx"],
+            include_dirs=[numpy.get_include()],
+        ),
+        compiler_directives={"language_level": "3"},
     ),
-    include_dirs=[numpy.get_include()],
-    setup_requires=["numpy", "cython"],
-    install_requires=["numpy", "pandas", "cython"],
-    packages=find_packages(),
 )
