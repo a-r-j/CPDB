@@ -18,6 +18,15 @@ Cython implementation of PDB -> DataFrame parsing
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
 
+## Performance
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/benchmark-dark.svg">
+  <img alt="Bar chart of time to parse 15 PDB files (4.9M atoms): CPDB 1.04 s (0.74 s returning a dict), ProDy 3.44 s, RDKit 4.51 s, Biotite 6.15 s, BioPandas 25.3 s, Biopython 26.2 s." src="docs/benchmark-light.svg">
+</picture>
+
+Reproduce with [`benchmark.ipynb`](benchmark.ipynb), which also regenerates these charts.
+
 ## Installation
 
 ### From PyPI
