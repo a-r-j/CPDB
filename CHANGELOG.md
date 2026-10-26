@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [uv](https://docs.astral.sh/uv/) for dependency management and local development (`pyproject.toml`, `uv.lock`)
-- GitHub Actions CI: tests on Python 3.9–3.13 and package build verification
+- GitHub Actions CI: tests on Python 3.10–3.13 and package build verification
 - Automated PyPI publishing on version tags (`v*`)
 - Dependabot for GitHub Actions and uv dependencies
 - This changelog
@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Parser rewritten as a single C-level scanner: ~4x faster on large files (980k atoms: 515 ms → 125 ms)
 - `max_atoms` now defaults to no limit (previously 1,000,000; larger files were silently truncated)
 - Text fields are decoded with `errors="replace"` instead of raising on invalid UTF-8
+
+### Removed
+
+- Support for Python 3.8 and 3.9 (end of life); `requires-python` is now `>=3.10`
 
 ### Fixed
 
