@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=84.2.1", "wheel", "Cython>=0.29", "numpy>=1.15"]
+requires = ["setuptools>=84.2.1", "wheel", "Cython>=0.29", "numpy>=2.2.6"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,7 +12,7 @@ license-files = ["LICENSE"]
 authors = [{ name = "Arian Jamasb", email = "arian@jamasb.io" }]
 requires-python = ">=3.10"
 dependencies = [
-    "numpy>=1.15",
+    "numpy>=2.2.6",
     "pandas",
     "cython>=0.29",
 ]
