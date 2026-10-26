@@ -2,6 +2,11 @@ import gzip
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 
+import numpy as np
+import pyximport
+
+pyximport.install(setup_args={"include_dirs": np.get_include()}, reload_support=True)
+
 import cpdb
 from cpdb import _fetch_af2, _fetch_pdb, parse
 
