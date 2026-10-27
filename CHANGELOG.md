@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-27
+
 ### Fixed
 
 - Source builds failing with clang (macOS) and gcc >= 14 when the build-time NumPy was older than the one
@@ -102,7 +104,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High-level `parse()` API returning a pandas `DataFrame`
 - Benchmark notebook and test data under `tests/test_data/`
 
-[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.1
 [0.3.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.0
 [0.2.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.2.1
 [0.2.0]: https://pypi.org/project/cpdb-protein/0.2.0/
