@@ -13,3 +13,5 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Library: keep version ranges wide for users; only refresh the dev lockfile
+    versioning-strategy: lockfile-only
