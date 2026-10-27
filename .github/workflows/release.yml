@@ -4,18 +4,32 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:  # dry-run the wheel builds without publishing
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
-  pypi:
-    name: Publish to PyPI
+  wheels:
+    name: Wheels (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # macos-15-intel: x86_64; macos-latest: arm64
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-15-intel, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pypa/cibuildwheel@b9e566a2b284570af229f6c2a33673410d0389a3 # v4.3.4
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  sdist:
+    name: Sdist
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/cpdb-protein/
     steps:
       - uses: actions/checkout@v7
 
@@ -24,10 +38,35 @@ jobs:
         with:
           version: "0.11.16"
           python-version: "3.12"
-          enable-cache: true
 
       - name: Build
-        run: uv build --sdist  # wheels need manylinux builds (cibuildwheel); PyPI rejects plain linux_x86_64
+        run: uv build --sdist
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
+  pypi:
+    name: Publish to PyPI
+    needs: [wheels, sdist]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cpdb-protein/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.16"
 
       - name: Publish
         run: uv publish

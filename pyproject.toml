@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=84.2.1", "wheel", "Cython>=0.29", "numpy>=1.15"]
+requires = ["setuptools>=84.2.1", "Cython>=3.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,7 +14,6 @@ requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.15",
     "pandas",
-    "cython>=0.29",
 ]
 
 [project.urls]
@@ -40,6 +39,10 @@ include = ["cpdb*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.cibuildwheel]
+test-extras = ["test"]
+test-command = "pytest {project}/tests -q"
 
 [tool.uv]
 required-version = ">=0.11.16"
