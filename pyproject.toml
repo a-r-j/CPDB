@@ -41,6 +41,8 @@ include = ["cpdb*"]
 testpaths = ["tests"]
 
 [tool.cibuildwheel]
+# pandas ships no 32-bit wheels, so these can't be installed (or tested)
+skip = ["*-win32", "*_i686"]
 test-extras = ["test"]
 test-command = "pytest {project}/tests -q"
 

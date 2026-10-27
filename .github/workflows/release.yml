@@ -14,6 +14,7 @@ jobs:
     name: Wheels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false  # report every platform; publish still needs all of them
       matrix:
         # macos-15-intel: x86_64; macos-latest: arm64
         os: [ubuntu-latest, ubuntu-24.04-arm, macos-15-intel, macos-latest, windows-latest]
