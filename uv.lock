@@ -149,7 +149,7 @@ wheels = [
 
 [[package]]
 name = "biopandas"
-version = "0.5.1"
+version = "0.5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "looseversion" },
@@ -160,9 +160,9 @@ dependencies = [
     { name = "pandas", version = "3.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "setuptools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/18/fd/bc0d3b4e44c7976704b7b79d29dc95316b7ac2d5d0c841813fa47443ae08/biopandas-0.5.1.tar.gz", hash = "sha256:218021e1ed8b24150515a40ee2d4a7e4b4723b113f15d1369d5bbe1a8d966f04", size = 52560, upload-time = "2024-08-01T17:35:06.056Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b9/2f/c86d18a71aa63f3954a5bc75fa2dc55d6e727f0eaec04be3b3a7d6e97c86/biopandas-0.5.2.tar.gz", hash = "sha256:69df1cd606eed0dde594bcf6cf3ef2fd718fefa935db7bcfa1969b252e183545", size = 53071, upload-time = "2026-08-24T20:21:28.261Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/21/95378d5d0dd5c64f382d3b43e5270e4e6618fd70b724713cb654cd2bdcab/biopandas-0.5.1-py3-none-any.whl", hash = "sha256:d663b18da52ba39979b478599d0d85cddb818f95c07dcb1caab355530201acda", size = 68288, upload-time = "2024-08-01T17:35:04.957Z" },
+    { url = "https://files.pythonhosted.org/packages/b7/72/b3791d743b08e2efc44143343feef8e4cbd7d4187135f028a75256b9e87f/biopandas-0.5.2-py3-none-any.whl", hash = "sha256:1abe0c82a4df3543874878d30f651952161fd94512bc1eea23253d4ef52c5280", size = 68791, upload-time = "2026-08-24T20:21:27.226Z" },
 ]
 
 [[package]]
