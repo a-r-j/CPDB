@@ -1,1 +1,3 @@
 include README.md LICENSE cpdb/*.pyx
+# Regenerate the C at build time rather than shipping one tied to the release machine's toolchain
+exclude cpdb/*.c

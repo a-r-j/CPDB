@@ -15,12 +15,18 @@ env:
 
 jobs:
   test:
-    name: Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    name: Python ${{ matrix.python-version }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12", "3.13"]
+        include:
+          # Oldest supported NumPy at runtime, to catch ABI/API coupling to the build-time NumPy
+          - os: ubuntu-latest
+            python-version: "3.10"
+            numpy: "numpy<2"
     steps:
       - uses: actions/checkout@v7
 
@@ -34,8 +40,12 @@ jobs:
       - name: Install dependencies
         run: uv sync --extra test --no-default-groups
 
+      - name: Downgrade NumPy
+        if: matrix.numpy
+        run: uv pip install "${{ matrix.numpy }}" "pandas<2.3"
+
       - name: Run tests
-        run: uv run pytest tests/ -v
+        run: uv run --no-sync pytest tests/ -v
 
   build:
     name: Build package

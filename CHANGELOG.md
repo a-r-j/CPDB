@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-27
+
+### Fixed
+
+- Source builds failing with clang (macOS) and gcc >= 14 when the build-time NumPy was older than the one
+  the shipped `parser.c` was generated against (`call to undeclared function 'PyDataType_TYPEOBJ'`)
+
+### Changed
+
+- The extension no longer uses the NumPy C-API (the `cimport numpy` was unused), so it builds without
+  NumPy headers and is not tied to the NumPy version present at build time
+- The sdist no longer ships a pre-generated `parser.c`; it is regenerated from `parser.pyx` at build time
+- Build requires `Cython>=3.0`; NumPy and `wheel` dropped from build requirements
+- Cython is no longer a runtime dependency
+- Releases publish wheels (Linux x86_64/aarch64, macOS x86_64/arm64, Windows) built with cibuildwheel
+- CI tests on macOS and Windows, and against NumPy 1.x
+
 ## [0.3.0] - 2026-10-26
 
 ### Added
@@ -87,7 +104,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High-level `parse()` API returning a pandas `DataFrame`
 - Benchmark notebook and test data under `tests/test_data/`
 
-[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.1
 [0.3.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.0
 [0.2.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.2.1
 [0.2.0]: https://pypi.org/project/cpdb-protein/0.2.0/
