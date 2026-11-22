@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Support for Python 3.10 (end of life); `requires-python` is now `>=3.11.5`
+
+### Security
+
+- Bumped locked dev/test dependencies to resolve advisories: tornado 6.6.1, soupsieve 4.1.3, setuptools 84.2.1
+
 ## [0.3.1] - 2026-10-27
 
 ### Fixed
