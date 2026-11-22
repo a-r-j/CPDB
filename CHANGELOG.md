@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-22
+
 ### Removed
 
 - Support for Python 3.10 (end of life); `requires-python` is now `>=3.11.5`
@@ -112,7 +114,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High-level `parse()` API returning a pandas `DataFrame`
 - Benchmark notebook and test data under `tests/test_data/`
 
-[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/a-r-j/CPDB/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.4.0
 [0.3.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.1
 [0.3.0]: https://github.com/a-r-j/CPDB/releases/tag/v0.3.0
 [0.2.1]: https://github.com/a-r-j/CPDB/releases/tag/v0.2.1
